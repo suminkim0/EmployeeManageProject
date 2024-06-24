@@ -1,6 +1,7 @@
 package com.thym.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +23,10 @@ public class EmployeeService {
 		map.put("pass", passwd);
 		
 		return mapper.login(map);
+	}
+
+	public List<EmployeeDTO> selectAllEmployee() {
+		return mapper.selectAllEmployee();
 	}
 	
 	

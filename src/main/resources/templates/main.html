@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	
+	})
+</script>
+</head>
+<body>
+  <table>
+  	<thead>
+  		<tr>
+  			<th>사원번호</th>
+  			<th>이름</th>
+  			<th>부서</th>
+  			<th>직급번호</th>
+  			<th>연봉</th>
+  		</tr>
+  	</thead>
+  	<tbody id="employee_list">
+  		<tr th:each="employee : ${list}">
+  			<td><a th:href="@{/employee/{eno}(eno=${employee.eno})}">[[${employee.eno}]]</a></td>
+  			<!--링크 속성값 http://localhost:9999/member/en6842 -->
+  			<td th:text="${employee.name}"></td>
+  			<td th:text="${employee.department}"></td>
+  			<td th:text="${employee.positionNo}"></td>
+  			<td th:text="${employee.salary}"></td>
+  		</tr>
+  	</tbody>
+  </table>
+</body>
+</html>
