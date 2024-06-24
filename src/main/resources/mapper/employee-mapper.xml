@@ -13,7 +13,7 @@
 </resultMap>
 
 <select id="selectAllEmployee" resultMap="employee">
-	select * from employee
+	SELECT * FROM EMPLOYEE
 </select>
 </mapper>
 
