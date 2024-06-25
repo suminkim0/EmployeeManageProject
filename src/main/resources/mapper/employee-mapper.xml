@@ -4,17 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thym.mapper.EmployeeMapper">
 
-<resultMap type="com.thym.dto.EmployeeDTO" id="employee">
-	<id column="ENO" property="eno" />
-	<result column="NAME" property="name" />
-	<result column="DEPARTMENT" property="department" />
-	<result column="POSITION_NO" property="positionNo" />
-	<result column="SALARY" property="salary" />
-</resultMap>
+	<resultMap type="com.thym.dto.EmployeeDTO" id="employee">
+		<id column="ENO" property="eno" />
+		<result column="NAME" property="name" />
+		<result column="DEPARTMENT" property="department" />
+		<result column="POSITION_NO" property="positionNo" />
+		<result column="SALARY" property="salary" />
+	</resultMap>
 
-<select id="selectAllEmployee" resultMap="employee">
-	SELECT * FROM EMPLOYEE
-</select>
+	<select id="selectAllEmployee" resultMap="employee">
+		select * from employee
+	</select>
 </mapper>
 
 
