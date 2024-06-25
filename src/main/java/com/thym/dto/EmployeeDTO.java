@@ -9,16 +9,18 @@ public class EmployeeDTO {
 	private String department;
 	private int positionNo;
 	private int salary;
-
+	private String positionName;
+	
 	public EmployeeDTO() {
 	}
 
-	public EmployeeDTO(String eno, String name, String department, int positionNo, int salary) {
+	public EmployeeDTO(String eno, String name, String department, int positionNo, int salary, String positionName) {
 		this.eno = eno;
 		this.name = name;
 		this.department = department;
 		this.positionNo = positionNo;
 		this.salary = salary;
+		this.positionName = positionName;
 	}
 
 	public String getEno() {
@@ -59,6 +61,14 @@ public class EmployeeDTO {
 
 	public void setSalary(int salary) {
 		this.salary = salary;
+	}
+	
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
 	}
 
 	@Override

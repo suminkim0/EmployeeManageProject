@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.thym.dto.EmployeeDTO;
 import com.thym.service.EmployeeService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
@@ -16,6 +19,18 @@ public class MainController {
 
 	public MainController(EmployeeService service) {
 		this.service = service;
+	}
+	
+	@GetMapping("/")
+	public String index() {
+		return "index";
+	}
+	
+	@PostMapping("/login")
+	public String login(String eno, String name, HttpSession session) {
+		EmployeeDTO dto = service.login(eno, name);
+		session.setAttribute("user", dto);
+		return "redirect:/main";
 	}
 	
 	@GetMapping("/main")

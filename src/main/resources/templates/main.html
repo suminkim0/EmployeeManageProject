@@ -3,7 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
 
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  a {
+    color: #3498db;
+    text-decoration: none;
+  }
+
+</style>
 </head>
 <body>
   <table>
@@ -12,7 +47,7 @@
   			<th>사원번호</th>
   			<th>이름</th>
   			<th>부서</th>
-  			<th>직급번호</th>
+  			<th>직급명</th>
   			<th>연봉</th>
   		</tr>
   	</thead>
@@ -22,7 +57,7 @@
   			<!--링크 속성값 http://localhost:9999/member/en6842 -->
   			<td th:text="${employee.name}"></td>
   			<td th:text="${employee.department}"></td>
-  			<td th:text="${employee.positionNo}"></td>
+  			<td th:text="${employee.positionName}"></td>
   			<td th:text="${employee.salary}"></td>
   		</tr>
   	</tbody>

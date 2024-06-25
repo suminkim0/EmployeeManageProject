@@ -10,11 +10,21 @@
 		<result column="DEPARTMENT" property="department" />
 		<result column="POSITION_NO" property="positionNo" />
 		<result column="SALARY" property="salary" />
+		<result column="POSITION_NAME" property="positionName" />
 	</resultMap>
+	
+	<select id="login" parameterType="map" resultMap="employee">
+		select * from
+		employee
+		where ENO like #{eno} and
+		NAME like #{name}
+	</select>
 
 	<select id="selectAllEmployee" resultMap="employee">
-		select * from employee
+		select * from employeepositionview
 	</select>
+	
+	
 </mapper>
 
 

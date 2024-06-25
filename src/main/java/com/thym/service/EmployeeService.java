@@ -17,10 +17,10 @@ public class EmployeeService {
 		this.mapper = mapper;
 	}
 	
-	public EmployeeDTO login(String id, String passwd) {
+	public EmployeeDTO login(String eno, String name) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		map.put("pass", passwd);
+		map.put("eno", eno);
+		map.put("name", name);
 		
 		return mapper.login(map);
 	}
