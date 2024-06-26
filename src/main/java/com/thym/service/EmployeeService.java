@@ -33,6 +33,10 @@ public class EmployeeService {
 	public int insertEmployee(EmployeeDTO dto) throws SQLException{
 		return mapper.insertEmployee(dto);
 	}
+
+	public int deleteEmployee(String eno) {
+		return mapper.deleteEmployee(eno);
+	}
 	
 	
 	

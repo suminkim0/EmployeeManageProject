@@ -29,6 +29,10 @@
 		values(#{eno},#{name},#{department},#{positionNo},#{salary})
 	</insert>
 	
+	<delete id="deleteEmployee" parameterType="employee">
+		delete from employee where eno like #{eno}
+	</delete>
+	
 	
 </mapper>
 

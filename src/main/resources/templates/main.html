@@ -3,6 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	window.onload = () => {
+		document.querySelectorAll('.btn_delete').forEach(item => {
+			item.onclick = () => {
+				const eno = item.closest('tr').querySelector('a').innerText;
+				/* alert(eno); */
+				fetch("/employee/delete/"+eno,{
+					method : "DELETE"
+				}).then(response => response.text())
+				.then(result => {
+					alert(result);
+					location.reload();
+				});
+				
+			}
+		})
+		
+		
+		
+		
+	}
+
+</script>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -58,6 +81,7 @@
   			<th>부서</th>
   			<th>직급번호</th>
   			<th>연봉</th>
+  			<th>추가작업</th>
   		</tr>
   	</thead>
   	<tbody id="employee_list">
@@ -68,6 +92,7 @@
   			<td th:text="${employee.department}"></td>
   			<td th:text="${employee.positionNo}"></td>
   			<td th:text="${employee.salary}"></td>
+  			<td><button class="btn_update">수정</button><button class="btn_delete">삭제</button></td>
   		</tr>
   	</tbody>
   </table>

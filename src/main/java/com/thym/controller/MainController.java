@@ -1,10 +1,16 @@
 package com.thym.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -84,8 +90,25 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	@DeleteMapping("/employee/delete/{eno}")
+	public ResponseEntity<String> deleteGrade(@PathVariable String eno){
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(eno);
+		int result = service.deleteEmployee(eno);
+		map.put("resultCode", result);
+		if(result == 1)
+			map.put("msg", "해당 등급 삭제 완료");
+		else
+			map.put("msg", "해당 등급 삭제 실패");
+		
+		return new ResponseEntity(map, HttpStatus.OK);
+	}
+	
 	
 }
+	
+	
+
 	
 	
 	
