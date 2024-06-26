@@ -12,5 +12,6 @@ public interface EmployeeMapper {
 
 	EmployeeDTO login(Map<String, Object> map);
 	List<EmployeeDTO> selectAllEmployee();
+	int insertEmployee(EmployeeDTO dto);
 
 }

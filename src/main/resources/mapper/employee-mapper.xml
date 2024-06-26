@@ -21,8 +21,13 @@
 	</select>
 
 	<select id="selectAllEmployee" resultMap="employee">
-		select * from employeepositionview
+		select * from employee
 	</select>
+	
+	<insert id="insertEmployee" parameterType="employee">
+		insert into employee
+		values(#{eno},#{name},#{department},#{positionNo},#{salary})
+	</insert>
 	
 	
 </mapper>

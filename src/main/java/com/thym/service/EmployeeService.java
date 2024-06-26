@@ -1,5 +1,6 @@
 package com.thym.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,10 @@ public class EmployeeService {
 
 	public List<EmployeeDTO> selectAllEmployee() {
 		return mapper.selectAllEmployee();
+	}
+
+	public int insertEmployee(EmployeeDTO dto) throws SQLException{
+		return mapper.insertEmployee(dto);
 	}
 	
 	

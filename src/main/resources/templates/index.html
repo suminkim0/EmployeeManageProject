@@ -3,14 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        text-align: center;
+        padding: 50px;
+    }
+    h2 {
+        color: #333;
+    }
+    form {
+        max-width: 300px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input[type="text"], button {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    a {
+        display: block;
+        margin-top: 10px;
+        text-decoration: none;
+        color: #333;
+    }
+</style>
 </head>
 <body>
-	<h2>로그인</h2>
-	<form action="/login" method="post">
-		<input type="text" name="eno" placeholder="사원번호 입력"><br>
-		<input type="text" name="name" placeholder="이름 입력"><br>
-		<button>로그인</button>
-		<a href="/employee/register/view">회원 가입</a>
-	</form>
+    <h2>로그인</h2>
+    <form action="/login" method="post">
+        <input type="text" name="eno" placeholder="사원번호 입력"><br>
+        <input type="text" name="name" placeholder="이름 입력"><br>
+        <button>로그인</button>
+        <a href="/employee/register/view">회원 가입</a>
+    </form>
 </body>
 </html>

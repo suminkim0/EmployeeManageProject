@@ -41,13 +41,22 @@
 </style>
 </head>
 <body>
+	<!-- 조건문 -->
+	<th:block th:if="${session.user != null && session.user.department != '인사' || session.user.positionNo < 3}">
+		<script>
+			alert('접근 권한이 없습니다.');
+			location.href = '/';
+		</script>
+	</th:block>
+
+	<th:block th:include="/fragments/header.html"></th:block>
   <table>
   	<thead>
   		<tr>
   			<th>사원번호</th>
   			<th>이름</th>
   			<th>부서</th>
-  			<th>직급명</th>
+  			<th>직급번호</th>
   			<th>연봉</th>
   		</tr>
   	</thead>
@@ -57,7 +66,7 @@
   			<!--링크 속성값 http://localhost:9999/member/en6842 -->
   			<td th:text="${employee.name}"></td>
   			<td th:text="${employee.department}"></td>
-  			<td th:text="${employee.positionName}"></td>
+  			<td th:text="${employee.positionNo}"></td>
   			<td th:text="${employee.salary}"></td>
   		</tr>
   	</tbody>

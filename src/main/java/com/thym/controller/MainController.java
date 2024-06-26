@@ -1,5 +1,6 @@
 package com.thym.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.thym.dto.EmployeeDTO;
 import com.thym.service.EmployeeService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -41,4 +43,62 @@ public class MainController {
 		return view;
 	}
 	
+	@GetMapping("/employee/register/view")
+	public String registerView() {
+		return "employee_register";
+	}
+	
+	@PostMapping("/employee/insert")
+	public String registerMember(EmployeeDTO dto, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		System.out.println(dto);
+		//모든 데이터가 정상인지 체크
+		response.setContentType("text/html;charset=utf-8");
+		if(dto.getEno().isEmpty() || dto.getName().isEmpty() || dto.getDepartment().isEmpty()) {
+			response.getWriter().println("<script>"
+					+ "alert('잘못된 데이터가 있습니다');"
+					+ "history.back();"
+					+ "</script>");
+		}else{
+			//DB에 등록 작업 시작
+			try {
+				service.insertEmployee(dto);
+				response.getWriter().println("<script>"
+						+ "alert('직원등록 성공, 메인페이지로 이동합니다.');"
+						+ "location.href='/main';"
+						+ "</script>");
+			}catch (Exception e) {
+				System.out.println(e);
+				response.getWriter().println("<script>"
+						+ "alert('직원 등록에 실패하였습니다.\\n데이터를 확인하세요.');"
+						+ "history.back();"
+						+ "</script>");
+			}
+		}
+		return null;
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
