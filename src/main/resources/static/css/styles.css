@@ -1,0 +1,79 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+#employee_list {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#employee_list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#employee_list ul.employee-header {
+    background-color: #343a40;
+    color: #fff;
+    display: flex;
+    padding: 10px;
+}
+
+#employee_list ul.employee-header li {
+    flex: 1;
+    text-align: center;
+}
+
+#employee_list ul.employee-details {
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#employee_list ul.employee-details li {
+    flex: 1;
+    text-align: center;
+}
+
+#employee_list ul.employee-details li a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#employee_list ul.employee-details li a:hover {
+    text-decoration: underline;
+}
+
+#employee_list ul.employee-details li input {
+    width: 80%;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+#employee_list ul.employee-details li button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+#employee_list ul.employee-details li button.btn_delete {
+    background-color: #dc3545;
+}
+
+#employee_list ul.employee-details li button:hover {
+    opacity: 0.8;
+}

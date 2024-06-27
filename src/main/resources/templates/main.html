@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/styles.css">
 <script>
 	window.onload = () => {
 		document.querySelectorAll('.btn_delete').forEach(item => {
@@ -19,53 +20,26 @@
 				
 			}
 		})
-		
-		
-		
-		
+
+		document.querySelectorAll('.btn_update').forEach(item => {
+			item.onclick = () => {
+				const eno = item.closest('tr').querySelector('a').innerText;
+				/* alert(eno); */
+				fetch("/employee/update/"+eno,{
+					method : "POST"
+				}).then(response => response.text())
+				.then(result => {
+					alert(result);
+				});
+			}
+		});
 	}
-
 </script>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-
-  th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  tr:hover {
-    background-color: #f1f1f1;
-  }
-
-  a {
-    color: #3498db;
-    text-decoration: none;
-  }
-
-</style>
 </head>
 <body>
 	<!-- 조건문 -->
-	<th:block th:if="${session.user != null && session.user.department != '인사' || session.user.positionNo < 3}">
+	<th:block th:if="${session.user != null && (session.user.department != '인사' || session.user.positionNo < 3)}">
 		<script>
 			alert('접근 권한이 없습니다.');
 			location.href = '/';
@@ -73,28 +47,24 @@
 	</th:block>
 
 	<th:block th:include="/fragments/header.html"></th:block>
-  <table>
-  	<thead>
-  		<tr>
-  			<th>사원번호</th>
-  			<th>이름</th>
-  			<th>부서</th>
-  			<th>직급번호</th>
-  			<th>연봉</th>
-  			<th>추가작업</th>
-  		</tr>
-  	</thead>
-  	<tbody id="employee_list">
-  		<tr th:each="employee : ${list}">
-  			<td><a th:href="@{/employee/{eno}(eno=${employee.eno})}">[[${employee.eno}]]</a></td>
+  	<div id="employee_list">
+  		<ul class="employee-header">
+  			<li>사원번호</li>
+  			<li>이름</li>
+  			<li>부서</li>
+  			<li>직급번호</li>
+  			<li>연봉</li>
+  			<li>추가작업</li>
+  		</ul>
+  		<ul class="employee-details" th:each="employee : ${list}">
+  			<li><a th:href="@{/employee/{eno}(eno=${employee.eno})}">[[${employee.eno}]]</a></li>
   			<!--링크 속성값 http://localhost:9999/member/en6842 -->
-  			<td th:text="${employee.name}"></td>
-  			<td th:text="${employee.department}"></td>
-  			<td th:text="${employee.positionNo}"></td>
-  			<td th:text="${employee.salary}"></td>
-  			<td><button class="btn_update">수정</button><button class="btn_delete">삭제</button></td>
-  		</tr>
-  	</tbody>
-  </table>
+  			<li><input type="text" th:value="${employee.name}"/></li>
+			<li><input type="text" th:value="${employee.department}"/></li>
+			<li><input type="text" th:value="${employee.positionNo}"/></li>
+			<li><input type="text" th:value="${employee.salary}"/></li>
+  			<li><button class="btn_update">수정</button><button class="btn_delete">삭제</button></li>
+  		</ul>
+  	</div>
 </body>
 </html>
