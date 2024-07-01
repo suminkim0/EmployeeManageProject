@@ -8,22 +8,22 @@
 	window.onload = () => {
 		document.querySelectorAll('.btn_delete').forEach(item => {
 			item.onclick = () => {
-				const eno = item.closest('tr').querySelector('a').innerText;
-				/* alert(eno); */
+				const eno = event.target.closest('ul').querySelector('a span').textContent;
+	            /* alert(eno); */
 				fetch("/employee/delete/"+eno,{
 					method : "DELETE"
 				}).then(response => response.text())
 				.then(result => {
 					alert(result);
 					location.reload();
-				});
+				}); 
 				
 			}
 		})
 
 		document.querySelectorAll('.btn_update').forEach(item => {
 			item.onclick = () => {
-				const eno = item.closest('tr').querySelector('a').innerText;
+				const eno = event.target.closest('ul').querySelector('a span').textContent;
 				/* alert(eno); */
 				fetch("/employee/update/"+eno,{
 					method : "POST"
@@ -57,7 +57,7 @@
   			<li>추가작업</li>
   		</ul>
   		<ul class="employee-details" th:each="employee : ${list}">
-  			<li><a th:href="@{/employee/{eno}(eno=${employee.eno})}">[[${employee.eno}]]</a></li>
+  			<li><a th:href="@{/employee/{eno}(eno=${employee.eno})}"><span>[[${employee.eno}]]</span></a></li>
   			<!--링크 속성값 http://localhost:9999/member/en6842 -->
   			<li><input type="text" th:value="${employee.name}"/></li>
 			<li><input type="text" th:value="${employee.department}"/></li>
