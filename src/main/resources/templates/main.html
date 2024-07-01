@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/styles.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	window.onload = () => {
 		document.querySelectorAll('.btn_delete').forEach(item => {
@@ -22,17 +23,31 @@
 		})
 
 		document.querySelectorAll('.btn_update').forEach(item => {
-			item.onclick = () => {
-				const eno = event.target.closest('ul').querySelector('a span').textContent;
-				/* alert(eno); */
-				fetch("/employee/update/"+eno,{
-					method : "POST"
-				}).then(response => response.text())
-				.then(result => {
-					alert(result);
+		    item.addEventListener('click', function() {
+		        console.log($(this).closest('ul').find('input, a span'));
+		        let obj = {};
+		        let eno = $(this).closest('ul').find('a span.eno').text();
+		        obj = {...obj, "eno": eno};
+		        $(this).closest('ul').find('input')
+				.each(function(idx, val){
+					obj = {...obj,[val.className]:val.value};
 				});
-			}
+				console.log(obj);
+				
+				$.ajax({
+					url:"/employee/update",
+					data : obj,
+					dataType : 'json',
+					method : "POST",
+					success : function(r){
+						console.log(r);
+					}
+				});
+		        
+		    });
 		});
+		
+		
 	}
 </script>
 
@@ -57,12 +72,12 @@
   			<li>추가작업</li>
   		</ul>
   		<ul class="employee-details" th:each="employee : ${list}">
-  			<li><a th:href="@{/employee/{eno}(eno=${employee.eno})}"><span>[[${employee.eno}]]</span></a></li>
+  			<li><a th:href="@{/employee/{eno}(eno=${employee.eno})}"><span class="eno">[[${employee.eno}]]</span></a></li>
   			<!--링크 속성값 http://localhost:9999/member/en6842 -->
-  			<li><input type="text" th:value="${employee.name}"/></li>
-			<li><input type="text" th:value="${employee.department}"/></li>
-			<li><input type="text" th:value="${employee.positionNo}"/></li>
-			<li><input type="text" th:value="${employee.salary}"/></li>
+  			<li><input type="text" th:value="${employee.name}" class="name"/></li>
+			<li><input type="text" th:value="${employee.department}" class="department"/></li>
+			<li><input type="text" th:value="${employee.positionNo}" class="positionNo"/></li>
+			<li><input type="text" th:value="${employee.salary}" class="salary"/></li>
   			<li><button class="btn_update">수정</button><button class="btn_delete">삭제</button></li>
   		</ul>
   	</div>

@@ -33,6 +33,14 @@
 		delete from employee where eno like #{eno}
 	</delete>
 	
+	<update id="updateEmployee" parameterType="employee">
+		update employee set 
+		name = #{name},
+		department = #{department},
+		position_no = #{positionNo},
+		salary = #{salary}
+		where eno like #{eno}
+	</update>
 	
 </mapper>
 

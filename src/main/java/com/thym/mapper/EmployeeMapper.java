@@ -14,5 +14,6 @@ public interface EmployeeMapper {
 	List<EmployeeDTO> selectAllEmployee();
 	int insertEmployee(EmployeeDTO dto);
 	int deleteEmployee(String eno);
+	int updateEmployee(EmployeeDTO dto);
 
 }

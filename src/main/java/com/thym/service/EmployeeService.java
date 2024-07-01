@@ -37,6 +37,10 @@ public class EmployeeService {
 	public int deleteEmployee(String eno) {
 		return mapper.deleteEmployee(eno);
 	}
+
+	public int updateEmployee(EmployeeDTO dto) {
+		return mapper.updateEmployee(dto);
+	}
 	
 	
 	

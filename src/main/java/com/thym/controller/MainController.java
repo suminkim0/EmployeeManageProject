@@ -104,6 +104,15 @@ public class MainController {
 		return new ResponseEntity(map, HttpStatus.OK);
 	}
 	
+	@PostMapping("/employee/update")
+	public String employeeUpdate(EmployeeDTO dto) {
+		System.out.println(dto);
+		int result = service.updateEmployee(dto);
+		System.out.println(result == 1 ? "직원정보를 수정하였습니다." : "직원정보를 수정하지 못했습니다.");
+		
+		return "redirect:/main";
+	}
+	
 	
 	
 	
