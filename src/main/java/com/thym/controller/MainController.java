@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.thym.dto.EmployeeDTO;
+import com.thym.dto.PositionDTO;
 import com.thym.service.EmployeeService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -105,17 +106,18 @@ public class MainController {
 	}
 	
 	@PostMapping("/employee/update")
-	public String employeeUpdate(EmployeeDTO dto) {
+	public ResponseEntity<String> employeeUpdate(EmployeeDTO dto) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println(dto);
 		int result = service.updateEmployee(dto);
-		System.out.println(result == 1 ? "직원정보를 수정하였습니다." : "직원정보를 수정하지 못했습니다.");
+		map.put("resultCode", result);
+		if(result == 1)
+			map.put("msg", "해당 등급 수정 완료");
+		else
+			map.put("msg", "해당 등급 수정 실패");
 		
-		return "redirect:/main";
+		return new ResponseEntity(map, HttpStatus.OK);
 	}
-	
-	
-	
-	
 	
 	
 }
