@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thym.mapper.PositionMapper">
+
+	<resultMap type="com.thym.dto.PositionDTO" id="position">
+		<id column="positionNo" property="POSITION_NO" />
+		<result column="positionName" property="POSITION_NAME" />
+	</resultMap>
+	
+	<select id="selectAllPosition" resultMap="position">
+		select * from position_list
+	</select>
+	
+	
+</mapper>

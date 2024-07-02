@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.thym.dto.EmployeeDTO;
 import com.thym.dto.PositionDTO;
 import com.thym.service.EmployeeService;
+import com.thym.service.PositionService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -25,11 +26,13 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 
 	private EmployeeService service;
-
-	public MainController(EmployeeService service) {
-		this.service = service;
-	}
+	private PositionService positionService;
 	
+	public MainController(EmployeeService service, PositionService positionService) {
+		this.service = service;
+		this.positionService = positionService;
+	}
+
 	@GetMapping("/")
 	public String index() {
 		return "index";
@@ -117,6 +120,14 @@ public class MainController {
 			map.put("msg", "해당 등급 수정 실패");
 		
 		return new ResponseEntity(map, HttpStatus.OK);
+	}
+	
+	@GetMapping("/position")
+	public ModelAndView positionView(ModelAndView view) {
+		List<PositionDTO> list = positionService.selectAllPosition();
+		view.addObject("list",list);
+		view.setViewName("position");
+		return view;
 	}
 	
 	
