@@ -11,4 +11,6 @@ public interface PositionMapper {
 
 	List<PositionDTO> selectAllPosition();
 
+	int updatePosition(PositionDTO dto);
+
 }

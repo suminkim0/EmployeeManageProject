@@ -1,5 +1,8 @@
 package com.thym.dto;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("position")
 public class PositionDTO {
 	private int positionNo;
 	private String positionName;

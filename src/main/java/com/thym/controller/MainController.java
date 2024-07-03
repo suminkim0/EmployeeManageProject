@@ -101,9 +101,9 @@ public class MainController {
 		int result = service.deleteEmployee(eno);
 		map.put("resultCode", result);
 		if(result == 1)
-			map.put("msg", "해당 등급 삭제 완료");
+			map.put("msg", "직원 정보 삭제 완료");
 		else
-			map.put("msg", "해당 등급 삭제 실패");
+			map.put("msg", "직원 정보 삭제 실패");
 		
 		return new ResponseEntity(map, HttpStatus.OK);
 	}
@@ -115,9 +115,9 @@ public class MainController {
 		int result = service.updateEmployee(dto);
 		map.put("resultCode", result);
 		if(result == 1)
-			map.put("msg", "해당 등급 수정 완료");
+			map.put("msg", "직원 정보 수정 완료");
 		else
-			map.put("msg", "해당 등급 수정 실패");
+			map.put("msg", "직원 정보 수정 실패");
 		
 		return new ResponseEntity(map, HttpStatus.OK);
 	}
@@ -130,6 +130,19 @@ public class MainController {
 		return view;
 	}
 	
+	@PostMapping("/position/update")
+	public ResponseEntity<String> positionUpdate(PositionDTO dto) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(dto);
+		int result = positionService.updatePosition(dto);
+		map.put("resultCode", result);
+		if(result == 1)
+			map.put("msg", "직급 정보 수정 완료");
+		else
+			map.put("msg", "직급 정보 수정 실패");
+		
+		return new ResponseEntity(map, HttpStatus.OK);
+	}
 	
 }
 	

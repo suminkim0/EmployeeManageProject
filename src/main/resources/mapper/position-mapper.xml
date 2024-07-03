@@ -5,13 +5,18 @@
 <mapper namespace="com.thym.mapper.PositionMapper">
 
 	<resultMap type="com.thym.dto.PositionDTO" id="position">
-		<id column="positionNo" property="POSITION_NO" />
-		<result column="positionName" property="POSITION_NAME" />
+		<id column="POSITION_NO" property="positionNo" />
+		<result column="POSITION_NAME" property="positionName" />
 	</resultMap>
 	
 	<select id="selectAllPosition" resultMap="position">
 		select * from position_list
 	</select>
 	
+	<update id="updatePosition" parameterType="position">
+		update position_list set 
+		position_name = #{positionName}
+		where position_no like #{positionNo}
+	</update>
 	
 </mapper>

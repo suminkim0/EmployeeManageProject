@@ -3,6 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	$(".btn_update").click((e) => {
+		var form = $(e.target).closest('form');
+        var positionNo = $(e.target).parent().children('input').val(); // 직급번호
+        var positionName = form.find('.position_name').val(); // 직급명
+        //alert("직급번호: " + positionNo + ", 직급명: " + positionName);
+		
+        let obj = {};
+        obj["positionNo"] = positionNo;
+        obj["positionName"] = positionName;
+        //alert(JSON.stringify(obj));
+        
+        $.ajax({
+        	url:"/position/update",
+        	data : obj,
+        	dataType : 'json',
+        	method : "POST",
+        	success: function(response){
+        		alert(response.msg);
+        		location.reload();
+        	}
+        })
+        
+	});
+})
+
+</script>
+<style>
+/* 기본적인 스타일 설정 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* 헤더 스타일 */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+/* 직급 목록 스타일 */
+#position_list {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.position-header {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #333;
+    margin-bottom: 10px;
+}
+
+.position-header li {
+    font-weight: bold;
+    flex: 1;
+    text-align: center;
+}
+
+#position-details {
+    list-style-type: none;
+    padding: 0;
+}
+
+#position-details li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="number"], input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 40%;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn_update {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn_update:hover {
+    background-color: #45a049;
+}
+</style>
 </head>
 <body>
 <th:block th:include="/fragments/header.html"></th:block>
@@ -11,11 +127,15 @@
   			<li>직급번호</li>
   			<li>직급명</li>
   		</ul>
-  		<ul class="position-details">
-  			<li><input type="number" class="positionNo"/></li>
-			<li><input type="text" class="positionName"/></li>
-  			<li><button class="btn_update">수정</button><button class="btn_delete">삭제</button></li>
-  		</ul>
+  		<ul id="position-details">
+			<li th:each="position : ${list}">
+				<form>
+					<input type="number" name="positionNo" class="position_no" th:value="${position.positionNo}" readonly>
+					<input type="text" name="posisionName" class="position_name" th:value="${position.positionName}">
+  					<button class="btn_update">수정</button>
+				</form>
+			</li>
+		</ul>
   	</div>
 </body>
 </html>

@@ -18,6 +18,10 @@ public class PositionService {
 	public List<PositionDTO> selectAllPosition() {
 		return mapper.selectAllPosition();
 	}
+
+	public int updatePosition(PositionDTO dto) {
+		return mapper.updatePosition(dto);
+	}
 	
 	
 	
